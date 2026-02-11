@@ -1,9 +1,9 @@
-# About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+# 关于我
 
-::github{repo="saicaca/fuwari"}
+你好！我是 **cetaceang**，一个机械工程在读本科生。
+这里是我的个人博客，用来记录学习路上的思考和折腾的过程。
 
-> ### Sources of images used in this site
-> - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+课余时间我喜欢打羽毛球，写点代码，研究 AI 角色扮演，偶尔也去看场音乐剧。
+机械是本行，但编程让我打开了另一扇门——于是就有了这个博客。
+
+如果你想聊聊，欢迎写邮件给我：simon@dreamworld.ltd
