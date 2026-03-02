@@ -19,13 +19,13 @@ dedirock 是 ColoCrossing 下游。这也基本决定了它的定位：价格便
 
 不过话说回来，价格都这么便宜了，还要什么自行车。预期放对、备份做好、关键业务别放上面，作为一台玩具鸡，或者新手的第一台鸡练手一下linux命令，搭建服务，它就是一台很有性价比的备选。另外，dedirock的客服服务响应快，而且态度好，确实符合他们宣称的以客户为先。
 
-官网：<https://billing.dedirock.com/aff.php?aff=383>
+<a href="https://billing.dedirock.com/aff.php?aff=383" target="_blank">官网链接</a>
 
 ## 本文评测机型配置（Promo VPS Saver NY BF 2025）
 
 | 配置项 | 详情 |
 |--------|------|
-| 购买链接 | [直达购买](https://billing.dedirock.com/aff.php?aff=383&pid=207&language=chinese) |
+| 购买链接 | <a href="https://billing.dedirock.com/aff.php?aff=383&pid=207&language=chinese" target="_blank">直达购买</a> |
 | CPU | 1 vCore |
 | 内存 | 2 GB |
 | 硬盘 | 30 GB SSD |
