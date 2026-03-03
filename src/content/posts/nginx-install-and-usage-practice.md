@@ -41,6 +41,12 @@ sudo mkdir -p /var/www/acme/.well-known/acme-challenge
 sudo chown -R www-data:www-data /var/www/acme
 ```
 
+如果你是 Ubuntu 默认安装，建议先移除默认站点链接，避免和 `default_server` 冲突：
+
+```bash
+sudo unlink /etc/nginx/sites-enabled/default
+```
+
 ### 2.1 主配置 `/etc/nginx/nginx.conf`
 
 ```nginx
