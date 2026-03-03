@@ -198,7 +198,55 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-## 3）创建反向代理站点配置（`/etc/nginx/sites-available/example`）
+## 3）准备 `/etc/letsencrypt` TLS 参数文件
+
+因为后面的 HTTPS 站点配置会引用这两个文件，我会先把目录和文件准备好。
+
+先创建目录：
+
+```bash
+sudo mkdir -p /etc/letsencrypt
+```
+
+创建 `/etc/letsencrypt/options-ssl-nginx.conf`：
+
+```bash
+sudo nano /etc/letsencrypt/options-ssl-nginx.conf
+```
+
+写入以下内容：
+
+```nginx
+ssl_session_cache shared:le_nginx_SSL:10m;
+ssl_session_timeout 1440m;
+ssl_session_tickets off;
+
+ssl_protocols TLSv1.2 TLSv1.3;
+ssl_prefer_server_ciphers off;
+
+ssl_ciphers "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384";
+```
+
+创建 `/etc/letsencrypt/ssl-dhparams.pem`：
+
+```bash
+sudo nano /etc/letsencrypt/ssl-dhparams.pem
+```
+
+写入以下内容：
+
+```pem
+-----BEGIN DH PARAMETERS-----
+MIIBCAKCAQEA//////////+t+FRYortKmq/cViAnPTzx2LnFg84tNpWp4TZBFGQz
++8yTnc4kmz75fS/jY2MMddj2gbICrsRhetPfHtXV/WVhJDP1H18GbtCFY2VVPe0a
+87VXE15/V8k1mE8McODmi3fipona8+/och3xWKE2rec1MKzKT0g6eXq8CrGCsyT7
+YdEIqUuyyOP7uWrat2DX9GgdT0Kj3jlN9K5W7edjcrsZCwenyO4KbXCeAvzhzffi
+7MA0BM0oNC9hkXL+nOmFg/+OTxIy7vKBg8P+OxtMb61zO7X8vC7CIAXFjvGDfRaD
+ssbzSibBsu/6iGtCOGEoXJf//////////wIBAg==
+-----END DH PARAMETERS-----
+```
+
+## 4）创建反向代理站点配置（`/etc/nginx/sites-available/example`）
 
 先写站点文件，但这一步先不启用：
 
@@ -206,7 +254,7 @@ sudo systemctl reload nginx
 sudo nano /etc/nginx/sites-available/example
 ```
 
-写入以下内容（示例上游是 `127.0.0.1:3001`，按你的实际服务端口调整）：
+写入以下完整配置（示例上游是 `127.0.0.1:3001`，按你的实际服务端口调整）：
 
 ```nginx
 upstream example_upstream {
