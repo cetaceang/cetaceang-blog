@@ -66,23 +66,8 @@ lang: 'zh-CN'
 
 ## 实际使用场景与体验
 
-### 我用它做什么
 
-<details>
-<summary><strong>点击查看详细测试数据</strong></summary>
 
-![使用场景]()
-
-</details>
-
-### 使用体验
-
-<details>
-<summary><strong>点击查看详细测试数据</strong></summary>
-
-![使用体验]()
-
-</details>
 
 ## 总结：值得买吗？
 
@@ -92,41 +77,13 @@ lang: 'zh-CN'
 >
 > ❌ **不推荐**：
 
-### 核心优势
 
-<details>
-<summary><strong>点击查看详细测试数据</strong></summary>
 
-![核心优势]()
 
-</details>
-
-### 适合这些人
-
-<details>
-<summary><strong>点击查看详细测试数据</strong></summary>
-
-![适合这些人]()
-
-</details>
-
-### 不适合这些人
-
-<details>
-<summary><strong>点击查看详细测试数据</strong></summary>
-
-![不适合这些人]()
-
-</details>
 
 ### 我的建议
 
-<details>
-<summary><strong>点击查看详细测试数据</strong></summary>
 
-![我的建议]()
-
-</details>
 
 ---
 
