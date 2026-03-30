@@ -1,15 +1,15 @@
 ---
 title: Docker 部署 Nginx Proxy Manager：极简的可视化反代神器
-published: 2026-03-25
+published: 2026-03-30
 description: 'Nginx Proxy Manager 专为简化 Nginx 反向代理管理而设计，提供美观的 Web 界面，让你无需手搓配置就能轻松搞定反代和免费 SSL 证书。'
 image: ''
 tags: [Docker, 教程, Nginx]
 category: '技术'
-draft: true
+draft: false
 lang: 'zh-CN'
 ---
 
-Nginx Proxy Manager (NPM) 是一个开源的 **Docker 容器项目**，专为简化 Nginx 反向代理管理而设计。它提供了一个漂亮、安全且易用的 Web 界面（基于 Tabler），让你无需编写复杂的 Nginx 配置，就能轻松管理代理主机、SSL 证书、重定向等功能。
+Nginx Proxy Manager (NPM) 是一个开源的 **Docker 容器项目**，专为简化 Nginx 反向代理管理而设计。它提供了一个漂亮、安全且易用的 Web 界面，让你无需编写复杂的 Nginx 配置，就能轻松管理代理主机、SSL 证书、重定向等功能。
 
 ## 🌟 核心亮点
 
@@ -93,3 +93,34 @@ services:
 
 ![Cloudflare 解析示例](https://imgbed.cetaceang.qzz.io/file/博客/1774426572871_cf解析.webp)
 
+### 第二步：在 Nginx Proxy Manager 中添加 Proxy Host
+
+完成域名解析后，回到 Nginx Proxy Manager 的管理面板进行反代配置：
+
+1. **进入 Proxy Hosts 页面**
+   在控制台首页，点击顶部导航栏的 **Hosts** -> **Proxy Hosts**，然后点击页面右上角绿色的 **Add Proxy Host** 按钮。
+   ![Proxy Hosts 页面](https://imgbed.cetaceang.qzz.io/file/博客/1774880674553_npm_addproxyhost.png)
+
+2. **配置**
+   在弹出的窗口中，填写基本转发信息：
+   - **Domain Names**：填写你刚刚解析的域名（例如 `nginx.yourdomain.com`），输入后按回车键确认。
+   - **Scheme**：保持默认的 `http`。
+   - **Forward Hostname / IP**：填写你要反向代理的目标 IP。由于我们使用了 `host` 网络模式，若反代本机服务直接填写 `127.0.0.1` 即可；NPM 不仅可以反向代理本机，也可以作为其它源站的访问入口，此时在这里直接填写对应源站的 IP 即可。
+   - **Forward Port**：填写目标服务的端口号。例如我们要反代 NPM 自身的管理面板，填写 `81`。
+   - **选项配置（Options）**：建议开启 **Cache Assets**（缓存静态资源）、**Block Common Exploits**（拦截常见漏洞探测）和 **Websockets Support**（支持 WebSocket 协议）。
+   ![配置 Details](https://imgbed.cetaceang.qzz.io/file/博客/1774880673377_npm_addhost1.png)
+
+3. **配置 SSL（自动申请证书）**
+   切换到 **SSL** 选项卡，NPM 会自动帮你申请免费的 Let's Encrypt 证书：
+   - **SSL Certificate**：下拉选择 `Request a new SSL Certificate`（申请新证书）。
+   - **开启安全选项**：建议勾选 **Force SSL**（强制 HTTPS）、**HTTP/2 Support**（开启 HTTP/2 支持）和 **HSTS Enabled**（启用 HSTS 提升安全性）。
+   - 勾选同意 Let's Encrypt 的服务条款（I Agree...）。
+   ![配置 SSL](https://imgbed.cetaceang.qzz.io/file/博客/1774880669979_npm_addhost2.png)
+
+最后点击右下角的 **Save** 按钮。NPM 会自动进行证书申请并保存配置，稍等片刻，当列表中出现带有绿色 `Online` 状态的记录时，就说明配置成功了！现在，你就可以通过 `https://nginx.yourdomain.com` 安全优雅地访问你的服务了。
+
+## 🎉 总结
+
+Nginx Proxy Manager 极大降低了反向代理和构建 HTTPS 站点的门槛，非常适合不想深陷复杂 Nginx 配置语法折磨的小白。特别是配合 Docker 的 `host` 网络模式，NPM 不仅能代理 Docker 内部的容器，更能轻松反向代理那些监听在本机回环地址（如 `127.0.0.1`）上的非 Docker 服务。
+
+除了基础的反代功能，在 NPM 的 **Advanced（高级设置）** 中，你还可以灵活配置访问黑白名单（Access Lists）、自定义重定向规则（Redirection Hosts）以及编写自定义的 Nginx 参数。随着你的不断探索与折腾，NPM 一定会成为你玩转服务器的绝佳利器！
