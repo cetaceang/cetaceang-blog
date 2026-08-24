@@ -45,6 +45,11 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Archive,
 		LinkPreset.About,
 		{
+			name: "VPS 库存",
+			url: "https://stock.cetaceang.de",
+			external: true,
+		},
+		{
 			name: "GitHub",
 			url: "https://github.com/cetaceang", // Internal links should not include the base path, as it is automatically added
 			external: true, // Show an external link icon and will open in a new tab

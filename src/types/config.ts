@@ -89,6 +89,7 @@ export type BlogPostData = {
 	description: string;
 	tags: string[];
 	draft?: boolean;
+	pinned?: boolean;
 	image?: string;
 	category?: string;
 	prevTitle?: string;

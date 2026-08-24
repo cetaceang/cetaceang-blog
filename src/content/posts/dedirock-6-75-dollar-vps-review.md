@@ -237,3 +237,5 @@ dedirock 是 ColoCrossing 下游。这也基本决定了它的定位：价格便
 ---
 
 *本文测评基于个人实际使用体验，仅供参考。不同地区、不同运营商的网络环境可能会有差异。*
+
+<em>如果你也在关注 VPS 补货，可以查看 <a href="https://stock.cetaceang.de" target="_blank" rel="noopener noreferrer">VPS 库存监控</a>，或用 <a href="https://t.me/vpsstock_notice_bot" target="_blank" rel="noopener noreferrer">Telegram Bot</a> 订阅提醒。</em>

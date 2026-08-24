@@ -246,3 +246,4 @@ lang: ''
   </a>
 </div>
 
+<em>如果你也在关注 VPS 补货，可以查看 <a href="https://stock.cetaceang.de" target="_blank" rel="noopener noreferrer">VPS 库存监控</a>，或用 <a href="https://t.me/vpsstock_notice_bot" target="_blank" rel="noopener noreferrer">Telegram Bot</a> 订阅提醒。</em>
