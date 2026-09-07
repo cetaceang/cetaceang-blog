@@ -1,11 +1,11 @@
 ---
 title: Docker 部署 Komari 探针：纯粹而优雅的轻量级监控
-published: 2026-03-25
-description: '厌倦了臃肿的探针？来看看这款资源占用极低、界面美观的纯粹轻量级服务器监控工具 Komari 的详细部署教程。'
+published: 2026-09-07
+description: '厌倦了臃肿的探针？来看看这款资源占用极低、界面美观的纯粹轻量级服务器监控工具 Komari 的部署教程。'
 image: ''
-tags: [Docker, 教程, 探针]
+tags: [Docker,教程]
 category: '技术'
-draft: true
+draft: false
 lang: 'zh-CN'
 ---
 
@@ -19,7 +19,7 @@ lang: 'zh-CN'
 - **历史数据追踪**：原生支持最长达 30 天及以上的历史监控数据记录与查询，方便随时回溯服务器的运行状态和性能瓶颈。
 - **部署极简**：提供简单直观的架构设计（服务端接收 + 轻量级 Agent 客户端推送），无论是 Docker 还是二进制安装都非常顺滑，维护成本极低。
 - **开源与隐私**：前后端完全开源，用户可以 100% 掌控自己的数据隐私，无需依赖第三方云服务。
-- **高颜值界面**：Web 面板设计直观美观，支持多种第三方主题（如 Purcarte 等，我就用的这个主题），数据展示（CPU、内存、流量、网络速度、运行时间等）一目了然。同时，你可以自定义站点的 `header` 和 `body`，为它添加一些美观又好玩的小组件。
+- **高颜值界面**：Web 面板设计直观美观，支持多种第三方主题（如 PurCarte 等，我就用的这个主题），数据展示（CPU、内存、流量、网络速度、运行时间等）一目了然。同时，你可以自定义站点的 `header` 和 `body`，为它添加一些美观又好玩的小组件。
 
 ## 🛠️ Docker Compose 部署示例
 
@@ -39,6 +39,12 @@ services:
     restart: unless-stopped
 ```
 
+使用 `docker compose up -d` 启动服务。
+
 ## 🚀 反代与后续配置说明
 
-*(这里可以继续补充你在实际使用中，如何配置 Nginx 反向代理、如何修改自定义 header/body 小组件等更详细的实操经验...)*
+使用 Nginx、Nginx Proxy Manager（NPM）或 Caddy，将域名反向代理到 `127.0.0.1:25774`，并启用 HTTPS 与 WebSocket 支持。
+
+首次访问域名后，按向导创建管理员账号。随后进入后台添加节点，复制系统生成的一键安装命令并在被监控服务器上执行；添加 Agent 时，建议选择“禁用远程控制”（`--disable-web-ssh`）。Agent 上线后即可在首页看到监控数据。
+
+更新时，在 `docker-compose.yml` 所在目录依次运行 `docker compose pull` 和 `docker compose up -d` 即可。
