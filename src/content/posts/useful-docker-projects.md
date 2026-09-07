@@ -1,12 +1,13 @@
 ---
 title: 值得部署的实用 Docker 项目推荐
-published: 2026-03-25
-pin: true
+published: 2026-09-07
+updated: 2026-09-08
+pinned: true
 description: '整理并推荐一些个人在使用并觉得不错，有价值的 Docker 项目，涵盖基础运维、个人效率与数据安全、资源聚合与娱乐等多个方面。'
 image: ''
 tags: [Docker]
 category: '技术'
-draft: true
+draft: false
 lang: 'zh-CN'
 ---
 
@@ -31,7 +32,7 @@ lang: 'zh-CN'
 
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh ./get-docker.sh --dry-run
+sudo sh ./get-docker.sh
 ```
 
 安装完成 Docker 以后，建议将当前用户加入 `docker` 用户组，这样以后运行 docker 命令就不需要每次都加 `sudo` 了：
@@ -58,6 +59,34 @@ docker run hello-world
 
 **Nginx Proxy Manager (NPM)** 完美解决了这个痛点。它提供了一个基于 Web 的图形化界面，让你只需在网页上“点点点”，就能轻松完成反向代理、WebSocket 支持、强制 HTTPS 等操作。而且它原生集成了 Let’s Encrypt，可以自动为你申请并续期免费的 SSL 证书。对于不擅长手搓nginx配置的新手小白来说，它绝对是装机必备的第一个容器。
 
+以下是我正在使用的 `docker-compose.yml`：
+
+```yaml
+version: '3.8'
+
+services:
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
+
+    # === 核心修改 ===
+    # 使用 host 模式，容器直接共用宿主机网卡
+    # 因此不需要（也不能）写 ports 映射，它会自动占用宿主机的 80, 443, 81 端口
+    network_mode: host
+
+    environment:
+      # 建议修改为你所在的时区，例如 Asia/Shanghai
+      TZ: "Asia/Shanghai"
+
+      # 如果你的宿主机不支持 IPv6，建议取消下面这行的注释
+      # DISABLE_IPV6: 'true'
+
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+```
+
 👉 **<a href="/posts/docker-deploy-npm/" target="_blank">点击这里查看 Nginx Proxy Manager 的详细介绍与 Docker 部署教程</a>**
 
 ### 2. Komari 探针：纯粹而优雅的轻量级监控
@@ -66,5 +95,22 @@ docker run hello-world
 
 **Komari** 是一款开源的轻量级、自托管服务器状态监控工具，与功能日益臃肿的哪吒探针不同，Komari 放弃了复杂功能，回归探针本质。它的资源占用极低（128M内存的小鸡都能轻松扎针），且原生支持长达 30 天的历史数据追踪，拥有极高颜值的 Web 面板。
 
+以下是我正在使用的 `docker-compose.yml`：
+
+```yaml
+version: "3.8"
+
+services:
+  komari:
+    image: ghcr.io/komari-monitor/komari:latest
+    container_name: komari
+    ports:
+      - "127.0.0.1:25774:25774"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+```
+
 👉 **<a href="/posts/docker-deploy-komari/" target="_blank">点击这里查看 Komari 的详细介绍与 Docker 部署教程</a>**
 
+> 本文将持续更新，最后更新于 2026/09/08。
