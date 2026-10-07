@@ -1,6 +1,6 @@
 ---
 title: VMISS US.LA.TRI.Basic 测评留档
-published: 2026-09-17
+published: 2026-10-07
 description: 'VMISS 洛杉矶三网各自优化 US.LA.TRI.Basic 实测：配置、线路、性能、IP 质量与使用建议'
 image: ''
 tags: [服务器测评]
