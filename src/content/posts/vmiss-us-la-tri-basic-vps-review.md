@@ -17,7 +17,7 @@ VMISS[官网介绍](https://www.vmiss.com/about-us/)是一家 2021 年成立的�
 
 全系列产品的带宽和流量都偏小，适合个人用户。
 
-官网：<https://app.vmiss.com/aff.php?aff=6059>
+官网：<a href="https://app.vmiss.com/aff.php?aff=6059" target="_blank" rel="noopener noreferrer">VMISS 官网</a>
 
 ## 本文评测机型配置（US.LA.TRI.Basic）
 
